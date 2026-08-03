@@ -6,26 +6,7 @@ const LOGO_URL = "/dryam-logo.png";
 const FALLBACK_REMOTE_LOGO = "https://dryamfoods-web.vercel.app/dryam-logo.png";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const CERTS = [
-  "ISO 22000",
-  "SFDA COMPLIANT",
-  "HALAL CERTIFIED",
-  "SPICES BOARD INDIA",
-  "APEDA",
-];
 
-function MarqueeSet({ ariaHidden }: { ariaHidden?: boolean }) {
-  return (
-    <div className="marqueeSet" aria-hidden={ariaHidden}>
-      {CERTS.map((cert) => (
-        <span key={cert}>
-          {cert}
-          <b aria-hidden="true"> &middot; </b>
-        </span>
-      ))}
-    </div>
-  );
-}
 
 export default function ComingSoon() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -353,8 +334,8 @@ export default function ComingSoon() {
 
         <p className="subcopy">
           <span className="subcopyText">
-            The new DRYAM FOODS experience is being crafted — garlic, onion &
-            fried products, vegetable powders, and ground spices & herbs.
+            The new DRYAM FOODS experience is being crafted — dehydrated garlic,
+            dehydrated onion &amp; fried products, and dehydrated vegetable powders.
             Same purity. A better way to explore it.
           </span>
         </p>
@@ -396,12 +377,7 @@ export default function ComingSoon() {
           </p>
         </div>
 
-        <nav className="marqueeWrap" aria-label="Certifications">
-          <div className="marqueeTrack">
-            <MarqueeSet />
-            <MarqueeSet ariaHidden />
-          </div>
-        </nav>
+
 
         <footer className="footer">
           <span>Surat, Gujarat, India</span>

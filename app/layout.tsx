@@ -25,7 +25,7 @@ const LOGO_URL = "/dryam-logo.png";
 export const metadata: Metadata = {
   title: "DRYAM FOODS — Pure. Organic. Ingredients. Coming Soon.",
   description:
-    "DRYAM FOODS — manufacturer & exporter of dehydrated garlic, onion & fried onion, vegetable powders, and ground spices & herbs from Surat, Gujarat, India. Pure, organic ingredients for global food manufacturers. Launching soon.",
+    "DRYAM FOODS — manufacturer & exporter of dehydrated garlic, dehydrated onion & fried onion, and dehydrated vegetable powders from Surat, Gujarat, India. Pure, organic ingredients for global food manufacturers. Launching soon.",
   icons: {
     icon: LOGO_URL,
     apple: LOGO_URL,
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     siteName: "DRYAM FOODS",
     title: "DRYAM FOODS — Pure. Organic. Ingredients.",
     description:
-      "The new DRYAM FOODS experience is being crafted — garlic, onion & fried products, vegetable powders, and ground spices & herbs, exported from Surat, Gujarat.",
+      "The new DRYAM FOODS experience is being crafted — dehydrated garlic, dehydrated onion & fried products, and dehydrated vegetable powders, exported from Surat, Gujarat.",
     images: [LOGO_URL],
     url: "https://dryamfoods-web.vercel.app/",
   },
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "DRYAM FOODS — Pure. Organic. Ingredients.",
     description:
-      "Something pure is on its way. Dehydrated garlic, onion, vegetable powders & ground spices — exported from Surat, Gujarat.",
+      "Something pure is on its way. Dehydrated garlic, dehydrated onion & dehydrated vegetable powders — exported from Surat, Gujarat.",
     images: [LOGO_URL],
   },
 };
