@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const LOGO_URL = "/dryam-logo.png";
+const LOGO_URL = "/dryam-logo-transparent.png";
 const FALLBACK_REMOTE_LOGO = "https://dryamfoods-web.vercel.app/dryam-logo.png";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -279,10 +279,6 @@ export default function ComingSoon() {
         <span className="tick tickBr" />
       </div>
 
-      {/* Vertical edge text */}
-      <div className="edgeText" aria-hidden="true">
-        COMING SOON — MMXXVI
-      </div>
 
       <main className="content">
         <div className="brand">
@@ -304,8 +300,8 @@ export default function ComingSoon() {
                 className="logoImg"
                 src={logoFailed ? FALLBACK_REMOTE_LOGO : LOGO_URL}
                 alt="DRYAM FOODS Logo"
-                width={56}
-                height={56}
+                width={100}
+                height={100}
                 onError={() => {
                   if (!logoFailed) {
                     setLogoFailed(true);
@@ -323,20 +319,16 @@ export default function ComingSoon() {
 
         <h1 className="headline">
           <span className="line line1">
-            <span>Something pure is</span>
-          </span>
-          <span className="line line2">
             <span>
-              <em>on its way.</em>
+              COMING <em>SOON.</em>
             </span>
           </span>
         </h1>
 
         <p className="subcopy">
           <span className="subcopyText">
-            The new DRYAM FOODS experience is being crafted — dehydrated garlic,
-            dehydrated onion &amp; fried products, and dehydrated vegetable powders.
-            Same purity. A better way to explore it.
+            The new <strong>DRYAM FOODS</strong>{" "}experience is being crafted —
+            premium garlic, onion, fried products &amp; pure vegetable powders.
           </span>
         </p>
 
