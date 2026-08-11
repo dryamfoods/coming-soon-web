@@ -14,6 +14,7 @@ export default function ComingSoon() {
   const [logoFailed, setLogoFailed] = useState(false);
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
   // L1 — powder particle canvas
@@ -220,7 +221,7 @@ export default function ComingSoon() {
     };
   }, []);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const value = email.trim();
 
@@ -234,7 +235,20 @@ export default function ComingSoon() {
     }
 
     setError("");
-    setSuccess(true);
+    setLoading(true);
+
+    try {
+      await fetch("/api/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: value }),
+      });
+    } catch (err) {
+      console.error("Failed to notify server:", err);
+    } finally {
+      setLoading(false);
+      setSuccess(true);
+    }
   }
 
   return (
@@ -354,8 +368,8 @@ export default function ComingSoon() {
                 }}
               />
             </div>
-            <button type="submit" className="notifyBtn">
-              Notify me
+            <button type="submit" className="notifyBtn" disabled={loading}>
+              {loading ? "Sending..." : "Notify me"}
             </button>
           </form>
           <p className="formMsg" role="alert">
