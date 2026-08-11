@@ -23,34 +23,27 @@ const dmMono = DM_Mono({
 const LOGO_URL = "/dryam-logo.png";
 
 export const metadata: Metadata = {
-  title: "DRYAM FOODS",
+  title: "DRYAM FOODS — Pure. Organic. Ingredients. Coming Soon.",
   description:
-    "DRYAM FOODS — manufacturer & exporter of premium garlic, onion & fried onion, and vegetable powders from Surat, Gujarat, India. Organic ingredients for global food manufacturers. Launching soon.",
+    "DRYAM FOODS — manufacturer & exporter of dehydrated garlic, dehydrated onion & fried onion, and dehydrated vegetable powders from Surat, Gujarat, India. Pure, organic ingredients for global food manufacturers. Launching soon.",
   icons: {
-    icon: [
-      { url: "/favicon.ico?v=3", sizes: "any" },
-      { url: "/favicon-32x32.png?v=3", type: "image/png", sizes: "32x32" },
-      { url: "/dryam-logo.png?v=3", type: "image/png" },
-    ],
-    apple: [
-      { url: "/apple-touch-icon.png?v=3", sizes: "180x180", type: "image/png" },
-    ],
-    shortcut: ["/favicon.ico?v=3"],
+    icon: LOGO_URL,
+    apple: LOGO_URL,
   },
   openGraph: {
     type: "website",
     siteName: "DRYAM FOODS",
-    title: "DRYAM FOODS",
+    title: "DRYAM FOODS — Pure. Organic. Ingredients.",
     description:
-      "The new DRYAM FOODS experience is being crafted — premium garlic, onion, fried products & vegetable powders, exported from Surat, Gujarat.",
+      "The new DRYAM FOODS experience is being crafted — dehydrated garlic, dehydrated onion & fried products, and dehydrated vegetable powders, exported from Surat, Gujarat.",
     images: [LOGO_URL],
     url: "https://dryamfoods-web.vercel.app/",
   },
   twitter: {
     card: "summary",
-    title: "DRYAM FOODS",
+    title: "DRYAM FOODS — Pure. Organic. Ingredients.",
     description:
-      "COMING SOON. Premium garlic, onion & vegetable powders — exported from Surat, Gujarat.",
+      "Something pure is on its way. Dehydrated garlic, dehydrated onion & dehydrated vegetable powders — exported from Surat, Gujarat.",
     images: [LOGO_URL],
   },
 };
