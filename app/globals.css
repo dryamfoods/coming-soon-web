@@ -238,37 +238,55 @@ button{ font: inherit; color: inherit; }
 }
 .logoWrap{
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  animation: revealFade .8s var(--ease) forwards;
-  animation-delay: 90ms;
+  animation: revealFade .8s var(--ease) forwards 90ms, floatLogo 5s ease-in-out infinite 900ms;
 }
 .logoRing{
   position: absolute;
-  inset: -20px;
-  width: calc(100% + 40px);
-  height: calc(100% + 40px);
+  inset: -16px;
+  width: calc(100% + 32px);
+  height: calc(100% + 32px);
   max-width: none;
   max-height: none;
   pointer-events: none;
   transform-origin: center;
-  animation: spinSlow 40s linear infinite;
+  animation: spinSlow 35s linear infinite;
 }
-.logoImg{
-  width: 96px;
-  height: 96px;
-  object-fit: contain;
+.logoBadge{
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 4px;
+  box-shadow: 
+    0 0 32px rgba(232, 168, 58, 0.5),
+    0 12px 35px rgba(0, 0, 0, 0.65),
+    inset 0 0 0 2.5px rgba(232, 168, 58, 0.7);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
   position: relative;
   z-index: 1;
-  filter: drop-shadow(0 0 20px rgba(232, 168, 58, 0.45)) contrast(1.1) brightness(1.08);
-  transition: transform 0.4s var(--ease);
 }
-.logoWrap:hover .logoImg{
-  transform: scale(1.05);
+.logoWrap:hover .logoBadge{
+  transform: scale(1.08);
+  box-shadow: 
+    0 0 42px rgba(232, 168, 58, 0.75),
+    0 16px 45px rgba(0, 0, 0, 0.75),
+    inset 0 0 0 2.5px rgba(232, 168, 58, 1);
+}
+.logoImg{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
 }
 .logoFallback{
   display: flex;
@@ -339,8 +357,13 @@ button{ font: inherit; color: inherit; }
 .line1 em{
   font-style: italic;
   font-variation-settings: 'opsz' 144, 'SOFT' 55, 'WONK' 1;
-  color: var(--amber);
+  background: linear-gradient(120deg, #E8A83A 0%, #FFF5E4 40%, #E8A83A 75%, #D48E28 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s ease-in-out infinite;
   margin-left: 0.2em;
+  display: inline-block;
 }
 
 /* Sub-copy */
@@ -416,11 +439,22 @@ button{ font: inherit; color: inherit; }
   letter-spacing: .02em;
   cursor: pointer;
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
   transition: transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+}
+.notifyBtn::before{
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-20deg);
+  animation: btnShimmer 3.5s ease-in-out infinite;
 }
 .notifyBtn:hover{
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px -8px rgba(232,168,58,.55);
+  box-shadow: 0 10px 26px -6px rgba(232,168,58,.65);
 }
 .notifyBtn:active{ transform: translateY(0); }
 
@@ -436,14 +470,29 @@ button{ font: inherit; color: inherit; }
 
 .mailtoFallback{
   display: inline-block;
-  margin-top: 16px;
+  margin-top: 14px;
   font-family: var(--font-mono);
   font-size: .74rem;
   letter-spacing: .05em;
   color: var(--cream);
-  opacity: .55;
+  opacity: .65;
   text-decoration: none;
   position: relative;
+  transition: opacity .3s var(--ease);
+}
+.mailtoFallback .hoverText{
+  display: none;
+  color: var(--amber);
+  font-weight: 500;
+}
+.mailtoFallback:hover{
+  opacity: 1;
+}
+.mailtoFallback:hover .defaultText{
+  display: none;
+}
+.mailtoFallback:hover .hoverText{
+  display: inline;
 }
 .mailtoFallback::after{
   content: '';
@@ -455,7 +504,6 @@ button{ font: inherit; color: inherit; }
   transform-origin: left;
   transition: transform .35s var(--ease);
 }
-.mailtoFallback:hover{ opacity: .9; }
 .mailtoFallback:hover::after{ transform: scaleX(1); }
 
 /* Success state */
@@ -536,6 +584,23 @@ button{ font: inherit; color: inherit; }
 @keyframes spinSlow{
   to{ transform: rotate(360deg); }
 }
+@keyframes floatLogo{
+  0%, 100%{ transform: translateY(0); }
+  50%{ transform: translateY(-7px); }
+}
+@keyframes goldShimmer{
+  0%{ background-position: 0% 50%; }
+  50%{ background-position: 100% 50%; }
+  100%{ background-position: 0% 50%; }
+}
+@keyframes btnShimmer{
+  0%, 75%{ left: -100%; }
+  100%{ left: 200%; }
+}
+@keyframes pulseTick{
+  0%, 100%{ opacity: .4; }
+  50%{ opacity: .85; }
+}
 @keyframes auroraDrift1{
   0%, 100%{ transform: translate(0,0) scale(1); }
   50%{ transform: translate(6vw, 8vh) scale(1.12); }
@@ -568,9 +633,9 @@ button{ font: inherit; color: inherit; }
   :root{ --frame-inset: 14px; }
   .content{ padding: 32px 20px 20px; }
   .brand{ margin-bottom: 16px; gap: 12px; }
-  .logoWrap{ width: 80px; height: 80px; }
-  .logoImg, .logoFallback{ width: 74px; height: 74px; }
-  .logoRing{ inset: -18px; width: calc(100% + 36px); height: calc(100% + 36px); }
+  .logoWrap{ width: 90px; height: 90px; }
+  .logoBadge{ width: 82px; height: 82px; padding: 5px; }
+  .logoRing{ inset: -14px; width: calc(100% + 28px); height: calc(100% + 28px); }
   .headline{ margin-bottom: 16px; }
   .subcopy{ margin-bottom: 20px; }
   .notifyForm{ flex-direction: column; }
@@ -581,9 +646,9 @@ button{ font: inherit; color: inherit; }
 @media (max-width: 480px){
   .content{ padding: 24px 16px 16px; }
   .brand{ margin-bottom: 20px; gap: 12px; }
-  .logoWrap{ width: 70px; height: 70px; }
-  .logoImg, .logoFallback{ width: 64px; height: 64px; }
-  .logoRing{ inset: -16px; width: calc(100% + 32px); height: calc(100% + 32px); }
+  .logoWrap{ width: 80px; height: 80px; }
+  .logoBadge{ width: 72px; height: 72px; padding: 4px; }
+  .logoRing{ inset: -12px; width: calc(100% + 24px); height: calc(100% + 24px); }
   .wordmark{ font-size: 0.95rem; letter-spacing: 0.18em; }
   .eyebrow{ font-size: 0.65rem; letter-spacing: 0.14em; margin-bottom: 20px; }
   .headline{ font-size: clamp(2.1rem, 9.5vw, 3.2rem); }

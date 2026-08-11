@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const LOGO_URL = "/dryam-logo-transparent.png";
+const LOGO_URL = "/dryam-logo.png";
 const FALLBACK_REMOTE_LOGO = "https://dryamfoods-web.vercel.app/dryam-logo.png";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -290,27 +290,29 @@ export default function ComingSoon() {
                 r="45"
                 fill="none"
                 stroke="#E8A83A"
-                strokeWidth="1"
-                strokeDasharray="3 8"
-                opacity={0.4}
+                strokeWidth="1.5"
+                strokeDasharray="4 6"
+                opacity={0.6}
               />
             </svg>
-            {!logoFailed ? (
-              <img
-                className="logoImg"
-                src={logoFailed ? FALLBACK_REMOTE_LOGO : LOGO_URL}
-                alt="DRYAM FOODS Logo"
-                width={100}
-                height={100}
-                onError={() => {
-                  if (!logoFailed) {
-                    setLogoFailed(true);
-                  }
-                }}
-              />
-            ) : (
-              <span className="logoFallback">D</span>
-            )}
+            <div className="logoBadge">
+              {!logoFailed ? (
+                <img
+                  className="logoImg"
+                  src={logoFailed ? FALLBACK_REMOTE_LOGO : LOGO_URL}
+                  alt="DRYAM FOODS Logo"
+                  width={110}
+                  height={110}
+                  onError={() => {
+                    if (!logoFailed) {
+                      setLogoFailed(true);
+                    }
+                  }}
+                />
+              ) : (
+                <span className="logoFallback">D</span>
+              )}
+            </div>
           </div>
           <p className="wordmark">DRYAM FOODS</p>
         </div>
@@ -359,8 +361,9 @@ export default function ComingSoon() {
           <p className="formMsg" role="alert">
             {error}
           </p>
-          <a className="mailtoFallback" href="mailto:connect@dryamfoods.com">
-            or email us directly
+          <a className="mailtoFallback" href="mailto:info@dryamfoods.com" title="info@dryamfoods.com">
+            <span className="defaultText">or email us directly</span>
+            <span className="hoverText">info@dryamfoods.com</span>
           </a>
 
           <p className="notifySuccess" role="status">
@@ -374,7 +377,7 @@ export default function ComingSoon() {
         <footer className="footer">
           <span>Surat, Gujarat, India</span>
           <span className="op">&middot;</span>
-          <a href="mailto:export@dryamfoods.com">Bulk &amp; export inquiries</a>
+          <a href="mailto:info@dryamfoods.com">Bulk &amp; export inquiries</a>
           <span className="op">&middot;</span>
           <span>&copy; 2026 DRYAM FOODS</span>
         </footer>

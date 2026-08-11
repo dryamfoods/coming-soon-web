@@ -23,7 +23,7 @@ const dmMono = DM_Mono({
 const LOGO_URL = "/dryam-logo.png";
 
 export const metadata: Metadata = {
-  title: "DRYAM FOODS — Pure. Organic. Ingredients. Coming Soon.",
+  title: "DRYAM FOODS",
   description:
     "DRYAM FOODS — manufacturer & exporter of premium garlic, onion & fried onion, and pure vegetable powders from Surat, Gujarat, India. Pure, organic ingredients for global food manufacturers. Launching soon.",
   icons: {
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "DRYAM FOODS",
-    title: "DRYAM FOODS — Pure. Organic. Ingredients.",
+    title: "DRYAM FOODS",
     description:
       "The new DRYAM FOODS experience is being crafted — premium garlic, onion, fried products & pure vegetable powders, exported from Surat, Gujarat.",
     images: [LOGO_URL],
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "DRYAM FOODS — Pure. Organic. Ingredients.",
+    title: "DRYAM FOODS",
     description:
       "COMING SOON. Premium garlic, onion & pure vegetable powders — exported from Surat, Gujarat.",
     images: [LOGO_URL],
