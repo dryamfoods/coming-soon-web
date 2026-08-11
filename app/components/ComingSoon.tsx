@@ -15,6 +15,7 @@ export default function ComingSoon() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   // L1 — powder particle canvas
   useEffect(() => {
@@ -220,7 +221,7 @@ export default function ComingSoon() {
     };
   }, []);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const value = email.trim();
 
@@ -234,7 +235,30 @@ export default function ComingSoon() {
     }
 
     setError("");
-    setSuccess(true);
+    setSubmitting(true);
+
+    try {
+      const res = await fetch("/api/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: value }),
+      });
+
+      const data = (await res.json().catch(() => null)) as {
+        error?: string;
+      } | null;
+
+      if (!res.ok) {
+        setError(data?.error || "Something went wrong. Please try again.");
+        return;
+      }
+
+      setSuccess(true);
+    } catch {
+      setError("Network error. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -279,10 +303,6 @@ export default function ComingSoon() {
         <span className="tick tickBr" />
       </div>
 
-      {/* Vertical edge text */}
-      <div className="edgeText" aria-hidden="true">
-        COMING SOON — MMXXVI
-      </div>
 
       <main className="content">
         <div className="brand">
@@ -294,27 +314,29 @@ export default function ComingSoon() {
                 r="45"
                 fill="none"
                 stroke="#E8A83A"
-                strokeWidth="1"
-                strokeDasharray="3 8"
-                opacity={0.4}
+                strokeWidth="1.5"
+                strokeDasharray="4 6"
+                opacity={0.6}
               />
             </svg>
-            {!logoFailed ? (
-              <img
-                className="logoImg"
-                src={logoFailed ? FALLBACK_REMOTE_LOGO : LOGO_URL}
-                alt="DRYAM FOODS Logo"
-                width={56}
-                height={56}
-                onError={() => {
-                  if (!logoFailed) {
-                    setLogoFailed(true);
-                  }
-                }}
-              />
-            ) : (
-              <span className="logoFallback">D</span>
-            )}
+            <div className="logoBadge">
+              {!logoFailed ? (
+                <img
+                  className="logoImg"
+                  src={logoFailed ? FALLBACK_REMOTE_LOGO : LOGO_URL}
+                  alt="DRYAM FOODS Logo"
+                  width={110}
+                  height={110}
+                  onError={() => {
+                    if (!logoFailed) {
+                      setLogoFailed(true);
+                    }
+                  }}
+                />
+              ) : (
+                <span className="logoFallback">D</span>
+              )}
+            </div>
           </div>
           <p className="wordmark">DRYAM FOODS</p>
         </div>
@@ -323,20 +345,16 @@ export default function ComingSoon() {
 
         <h1 className="headline">
           <span className="line line1">
-            <span>Something pure is</span>
-          </span>
-          <span className="line line2">
             <span>
-              <em>on its way.</em>
+              COMING <em>SOON.</em>
             </span>
           </span>
         </h1>
 
         <p className="subcopy">
           <span className="subcopyText">
-            The new DRYAM FOODS experience is being crafted — dehydrated garlic,
-            dehydrated onion &amp; fried products, and dehydrated vegetable powders.
-            Same purity. A better way to explore it.
+            The new <strong>DRYAM FOODS</strong>{" "}experience is being crafted —
+            premium garlic, onion, fried products &amp; vegetable powders.
           </span>
         </p>
 
@@ -353,6 +371,7 @@ export default function ComingSoon() {
                 placeholder="you@company.com"
                 autoComplete="email"
                 required
+                disabled={submitting || success}
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -360,20 +379,26 @@ export default function ComingSoon() {
                 }}
               />
             </div>
-            <button type="submit" className="notifyBtn">
-              Notify me
+            <button
+              type="submit"
+              className="notifyBtn"
+              disabled={submitting || success}
+            >
+              {submitting ? "Sending…" : "Notify me"}
             </button>
           </form>
           <p className="formMsg" role="alert">
             {error}
           </p>
-          <a className="mailtoFallback" href="mailto:connect@dryamfoods.com">
-            or email us directly
+          <a className="mailtoFallback" href="mailto:info@dryamfoods.com" title="info@dryamfoods.com">
+            <span className="defaultText">or email us directly</span>
+            <span className="hoverText">info@dryamfoods.com</span>
           </a>
 
           <p className="notifySuccess" role="status">
-            <span className="dot" aria-hidden="true" />
-            <span>You&rsquo;re on the list. We&rsquo;ll write when we open.</span>
+            <span className="successMark" aria-hidden="true" />
+            <span className="successTitle">You&rsquo;re on the list.</span>
+            <span className="successSub">We&rsquo;ll write when we open.</span>
           </p>
         </div>
 
@@ -382,7 +407,7 @@ export default function ComingSoon() {
         <footer className="footer">
           <span>Surat, Gujarat, India</span>
           <span className="op">&middot;</span>
-          <a href="mailto:export@dryamfoods.com">Bulk &amp; export inquiries</a>
+          <a href="mailto:info@dryamfoods.com">Bulk &amp; export inquiries</a>
           <span className="op">&middot;</span>
           <span>&copy; 2026 DRYAM FOODS</span>
         </footer>
