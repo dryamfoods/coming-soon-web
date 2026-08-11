@@ -330,7 +330,7 @@ export default function ComingSoon() {
         <p className="subcopy">
           <span className="subcopyText">
             The new <strong>DRYAM FOODS</strong>{" "}experience is being crafted —
-            premium garlic, onion, fried products &amp; pure vegetable powders.
+            premium garlic, onion, fried products &amp; vegetable powders.
           </span>
         </p>
 
