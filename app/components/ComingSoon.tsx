@@ -15,6 +15,7 @@ export default function ComingSoon() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   // L1 — powder particle canvas
   useEffect(() => {
@@ -220,7 +221,7 @@ export default function ComingSoon() {
     };
   }, []);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const value = email.trim();
 
@@ -234,7 +235,30 @@ export default function ComingSoon() {
     }
 
     setError("");
-    setSuccess(true);
+    setSubmitting(true);
+
+    try {
+      const res = await fetch("/api/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: value }),
+      });
+
+      const data = (await res.json().catch(() => null)) as {
+        error?: string;
+      } | null;
+
+      if (!res.ok) {
+        setError(data?.error || "Something went wrong. Please try again.");
+        return;
+      }
+
+      setSuccess(true);
+    } catch {
+      setError("Network error. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -347,6 +371,7 @@ export default function ComingSoon() {
                 placeholder="you@company.com"
                 autoComplete="email"
                 required
+                disabled={submitting || success}
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -354,8 +379,12 @@ export default function ComingSoon() {
                 }}
               />
             </div>
-            <button type="submit" className="notifyBtn">
-              Notify me
+            <button
+              type="submit"
+              className="notifyBtn"
+              disabled={submitting || success}
+            >
+              {submitting ? "Sending…" : "Notify me"}
             </button>
           </form>
           <p className="formMsg" role="alert">
