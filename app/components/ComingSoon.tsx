@@ -396,8 +396,9 @@ export default function ComingSoon() {
           </a>
 
           <p className="notifySuccess" role="status">
-            <span className="dot" aria-hidden="true" />
-            <span>You&rsquo;re on the list. We&rsquo;ll write when we open.</span>
+            <span className="successMark" aria-hidden="true" />
+            <span className="successTitle">You&rsquo;re on the list.</span>
+            <span className="successSub">We&rsquo;ll write when we open.</span>
           </p>
         </div>
 

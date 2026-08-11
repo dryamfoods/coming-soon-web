@@ -506,23 +506,48 @@ button{ font: inherit; color: inherit; }
 /* Success state */
 .notifySuccess{
   display: none;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: center;
   gap: 10px;
-  text-align: left;
-  font-family: var(--font-body);
-  font-size: .95rem;
-  color: var(--cream);
+  text-align: center;
+  width: 100%;
 }
-.notifySuccess .dot{
-  flex: none;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--sage);
-  transform: translateY(-2px);
+.notifySuccess .successMark{
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--amber);
+  opacity: 0.75;
+}
+.notifySuccess .successTitle{
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--cream);
+  line-height: 1.25;
+}
+.notifySuccess .successSub{
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+  opacity: 0.85;
+  line-height: 1.4;
 }
 .notifyWrap.isSuccess .notifyForm,
-.notifyWrap.isSuccess .mailtoFallback{ display: none; }
-.notifyWrap.isSuccess .notifySuccess{ display: flex; }
+.notifyWrap.isSuccess .mailtoFallback,
+.notifyWrap.isSuccess .formMsg{ display: none; }
+.notifyWrap.isSuccess .notifySuccess{
+  display: flex;
+  animation: successIn 0.7s var(--ease) both;
+}
+
+@keyframes successIn{
+  from{ opacity: 0; transform: translateY(8px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
 
 
 
